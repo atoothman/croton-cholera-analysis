@@ -1,0 +1,111 @@
+﻿Column Name ,Description ,Data Type ,Unit,Year / Time Reference,Calculation,Source,Missing Value Meaning,Notes,Role in Analysis 
+ward_id,Numeric identifier for each New York City Ward,identifier,none,Ward boundaries as defined during cholera outbreak years ,n/a,,n/a,Used to link ward-level records across years. ,Identifier
+ward_name,Name of New York City Ward ,categorical,none ,1832 and 1849,n/a,"Disturnell, John. New York as it was and as it is: giving an account of the city from its settlement to the present time : forming a complete guide to the great metropolis of the nation, including the city of Brooklyn and the surrounding cities and villages : together with a classified business directory. New York: D. Van Nostrand, 1876.",n/a,Ward names reflect historical administrative boundaries.,Identifier
+population_1830,Total population of each ward recorded in the 1830 records ,numeric,persons,1830,n/a,"Board of Assistant Alderman. Documents of the Board of Assistants, from No. 1 to No. 78, and from A to O, inclusive, from May 10, 1831, to May 8, 1832. Vol. 1. New York: Printed by order of the Common Council, 1837. ",Ward not yet established or population not recorded ,"The 1830 ward population is used as the best available estimate of population size at the time of the 1832 cholera outbreak.
+The Fifthteenth Ward was not established until 1832 and therefore has no population count in the 1830 records. ",control 
+population_1850,Total population of each ward recorded in the 1850 census ,numeric,persons,1850,n/a,"United States Census Office. The Seventh Census of the United States, 1850: Statistics of the State of New York. Washington DC: Government Printing Office, 1853.",Ward not yet established or population not recorded ,"The 1850 census is used as the best availble estimate of population size at the time of 1849 cholera outbreak. 
+The Nineteenth Ward was established  in 1849, but is not recorded on cholera outbreak mapping and therefore has population data in the 1850 census but no associated cholera mortality data.",control 
+ward_area_1832,Land area of each ward as defined during the 1832 cholera outbreak,numeric,square miles,circa 1832,n/a,"Polygons created in Google Earth with boundaries found in 1830 Map 
+Lionel Pincus and Princess Firyal Map Division, The New York Public Library. ""A new map of the city of New York : comprising all the late improvements, compiled and corrected from authentic documents."" New York Public Library Digital Collections.",Ward not yet established,"Ward land area was measured in square miles using Google Earth by constructing polygon boundaries for each ward based on archival maps. Although municipal records indicate that the 15th Ward was established in 1832, the contemporaneous cholera hotspot map depicts only 14 wards. To maintain consistency between spatial boundaries and disease representation, ward area measurments for the 1832 analysis was based on the 14 ward configuration shown in the 1830 ward map. ",control 
+ward_area_1849,Land area of each ward as defined during the 1849 cholera outbreak,numeric,square miles,1848-1850,n/a,"Polygons created in Google Earth with boundaries found in 1850 Map
+Lionel Pincus and Princess Firyal Map Division, The New York Public Library. ""Map of the city of New York, 1850"" New York Public Library Digital Collections.  ",Ward not yet established,"Ward area in square miles was measured utilizing Google Earth and creating polygons of each ward based on boundaries found in archival maps. 
+
+Reflects boundary changes between 1832 and 1849, including the establishment of the 15th Ward (established in 1832 but not reflected in cholera map data; bound by Houston St., 6th Ave., 14th St., and Bowery), 16th Ward (previously the 12th Ward in 1832 data; bound by 14th St., 6th Ave., 40th St., west side), 17th Ward (11th Ward split to establish the 17th Ward; bound by 14th St., Avenue B, Rivington St., and Bowery) and 18th Ward (previously the 12th Ward in 1832 data; bound by 14th St., 6th Ave., 40th St., and 1st Ave.). 12th Ward accounted for north of 40th St. 
+
+1850 Ward map does not show 19th Ward. This map reflects the ward boundaries in 1849 before the 19th ward was established in 1850. 
+
+Ward boundary changes will need to be considered in the analysis. ",control 
+pop_density_1830,Population density of each ward based on 1830 population and 1832 ward area,numeric,persons per square mile,1830 and 1832,population_1830 / ward_area_1832,"Calculated from
+Board of Assistant Alderman. Documents of the Board of Assistants, from No. 1 to No. 78, and from A to O, inclusive, from May 10, 1831, to May 8, 1832. Vol. 1. New York: Printed by order of the Common Council, 1837. ",Population or ward area unavailable,Approximates residental crowding prior to Croton construction.,exposure
+pop_density_1850,Population density of each ward based on 1850 population and 1849 ward area,numeric,persons per square mile,1848-1850,population_1850 / ward_area_1849,"Calculated from
+United States Census Office. The Seventh Census of the United States, 1850: Statistics of the State of New York. Washington DC: Government Printing Office, 1853.",Population or ward area unavailable,Captures crowding conditions during the 1849 cholera outbreak.,exposure
+cholera_1832_hotspot,Indicator of whether a ward experienced a cholera hotspot during the 1832 outbreak,binary ,"0 = no reported concentration, 1 = hotspot/location where disease appeared",1832,n/a,"General Research Division, The New York Public Library. ""Map of New York City showing the spread of the cholera outbreak in the Summer of 1832, [Frontispiece]"" New York Public Library Digital Collections.",Cholera activity not documented,Spatial concentration of disease intensity as interpreted by contemporary observers. Used due to lack of ward-level death counts for 1832 . This variable reflects spatial clustering rather than death totals.,outcome
+cholera_1849_deaths,Number of cholera deaths recorded in each ward during 1849 outbreak,numeric,deaths,1849,n/a,"“The Cholera Districts of New-York.” New-York Daily Tribune, August 3, 1866.",Death count not reported for ward,Represents reported deaths during peak epidemic period in 1849. ,outcome
+cholera_1849_rate_per_1000,"Cholera mortality rate per 1,000 residents in each ward during 1849 outbreak",numeric,"deaths per 1,000 persons","1849 cholera count, population from 1850 census ",(cholera_1849_deaths / population_1850) x 1000,"Calculated from
+“The Cholera Districts of New-York.” New-York Daily Tribune, August 3, 1866. 
+United States Census Office. The Seventh Census of the United States, 1850: Statistics of the State of New York. Washington DC: Government Printing Office, 1853.",Deaths or population not reported for ward,Uses population from 1850 census as closed available denominator. ,outcome
+sewer_present_1838,Indicator of whether a ward had documented sewer infrastructure prior to 1838,binary ,"0 = no documented sewer presence, 1 = sewer present",1838,n/a,"Moehring, Eugene P. “Map 2 Gas Mains and Sewers Up to 1838.” Map. Public Works and the Patterns of Urban Real Estate Growth in Manhattan, 1835-1894. New York: Arno Press, 1981.",Sewer presence indeterminate,"Indicates presence only in ward, not extent or capacity. 
+Limited information exisits on sewers prior to 1838 and the city was largely unsewered. 
+Map 2 of Gas Mains and Sewers up to 1838 showed existing sewer infrastructure.Map 2 was cross referenced with Board of Alderman reports and Common Council minutes. This was used as the closest data for 1832 cholera outbreak. ",exposure
+sewer_density_1838,Ordinal classification of sewer coverage density within each ward prior to 1838,ordinal ,categorical scale (0-3),1838,n/a,"Visual coding from 
+Moehring, Eugene P. “Map 2 Gas Mains and Sewers Up to 1838.” Map. Public Works and the Patterns of Urban Real Estate Growth in Manhattan, 1835-1894. New York: Arno Press, 1981.",Sewer coverage unclear or not documented,"Sewer density categories defined as follows:
+0= none, no sewer line existing 
+1= limited, 1-2 sewer lines often boundary lines between wards, not ward serving
+2= moderate, 3-4 sewer lines, partial internal coverage, serves some but not most streets
+3= substantial, 4+ sewer lines, clear internal network, broad ward coverage",exposure
+sewer_present_1847,"Indicator of whether a ward had documented sewer infrastructure by 1847, prior to 1849 outbreak",binary ,"0 = no documented sewer presence, 1 = sewer present",1847,n/a,"Moehring, Eugene P. “Map 4 Sewers Installed.” Map. Public Works and the Patterns of Urban Real Estate Growth in Manhattan, 1835-1894. New York: Arno Press, 1981.",Sewer presence indeterminate,"Reflects infrastructure expansion following Croton water introduction but prior to 1849 cholera outbreak.
+Indicated presence only, not extent or capacity. ",exposure
+sewer_density_1847,Ordinal classification of sewer coverage density within each ward prior to 1849 outbreak ,ordinal ,categorical scale (0-3),1847,n/a,"Visual coding from 
+Moehring, Eugene P. “Map 4 Sewers Installed.” Map. Public Works and the Patterns of Urban Real Estate Growth in Manhattan, 1835-1894. New York: Arno Press, 1981. ",Sewer coverage unclear or incomplete ,"Sewer density categories defined as follows:
+0= none, no sewer line existing 
+1= limited, 1-2 sewer lines often boundary lines between wards, not ward serving
+2= moderate, 3-4 sewer lines, partial internal coverage, serves some but not most streets
+3= substantial, 4+ sewer lines, clear internal network, broad ward coverage",exposure
+cellar_or_basement_count_1850,Number of inhabited cellar or basement dwellings by ward ,numeric,count,1850,n/a,"“The Dens of Death.” New-York Daily Tribune. June 5, 1850.",Data not reported for ward ,"""Cellar"" and ""basement"" are used interchangeably in era reporting. Cellar count only represents inhabited cellars.
+",exposure
+cellar_room_count_1850,Total number of rooms within inhabited cellar or basement dwellings within each ward,numeric,rooms,1850,n/a,"“The Dens of Death.” New-York Daily Tribune. June 5, 1850.",Room count not reported ,Used to approimate dwelling capacity and crowding.,exposure
+cellar_inhabitant_count_1850,Total number of persons reported as living in cellar or basement dwellings within each ward,numeric,persons,1850,n/a,"“The Dens of Death.” New-York Daily Tribune. June 5, 1850.",Inhabitant counts not reported,"Represents populations exposed to damp and flood-prone housing conditions. 
+Inspection based enumeration may undercount concealed populations.",exposure
+persons_per_room_1850,Average number of persons per cellar room within each ward,numeric,persons per room,1850, cellar_inhabitant_count_1850 / cellar_room_count_1850,"Calculated from 
+“The Dens of Death.” New-York Daily Tribune. June 5, 1850.",Room or inhabitant counts unavailable ,Used as a measure of residential crowding in cellar dwellings.,exposure
+cellar_exposure_rate_1850,Proportion of a ward's population living in cellar dwellings ,numeric,ratio (0-1),1850,cellar_inhabitant_count_1850 / population_1850,"Calculated from 
+“The Dens of Death.” New-York Daily Tribune. June 5, 1850.
+United States Census Office. The Seventh Census of the United States, 1850: Statistics of the State of New York. Washington DC: Government Printing Office, 1853.",Population or cellar counts unavailable,Used as a measure of population exposure to unsanitary and flood-prone housing conditions.,exposure
+cellar_density_1850,Density of cellar dwellings within each ward,numeric,cellars per square mile ,1850,cellar_or_basement_count_1850 / ward_area_1849,"Calculated from 
+“The Dens of Death.” New-York Daily Tribune. June 5, 1850.",Cellar counts or ward area unavailable,Normalizes cellar prevalence by ward size to allow comparison across wards of differing geographic area.,exposure
+stopcock_count_1850,Number of Croton system stopcocks recorded within each ward,numeric,count,1850,n/a,"Currier, N., and Endicott. Map of the Croton Water Pipes with the Stop Cocks. Lithograph. New York, ca. 1850. New York Historical Society.",Blanks indicate incomplete or indeterminate coverage,"Stopcocks indicate points of flow control and water access within water distribution network. Important indicator as south of 14th street was almostly completely piped with Croton Water mains by 1853, however pressure and volume differ.",exposure
+stopcock_density_1850,Ordinal classification of stopcock concentration within each ward,ordinal,categorical scale (1-3),1850,n/a,"Coded from visual inspection of 
+Currier, N., and Endicott. Map of the Croton Water Pipes with the Stop Cocks. Lithograph. New York, ca. 1850. New York Historical Society.",Distribution unclear or incomplete,"1(low) ≤ 35;  2 (moderate) = 36-59; 3(high) ≥ 60
+Stopcocks density variable is ordinal transformation of ward-level counts, categorized into low, moderate, and high groups based on terciles of the observed distrubtion to reduce sensitivity to minor counting uncertainty.",exposure
+hydrant_count_1850,Number of fire hydrants connected to the Croton system within each ward,numeric,count,1850,n/a,"Currier, N., and Endicott. Map of the Croton Water Pipes with the Stop Cocks. Lithograph. New York, ca. 1850. New York Historical Society.",Blank indicates hydrant presence not fully documented,"Hydrants served firefighting and street washing functions, but there are also accounts of hydrants being used for potable drinking water",exposure
+hydrant_density_1850,Ordinal classification of hydrant concentration within a ward,ordinal,categorical scale (1-3),1850,n/a,"Coded from visual inspection of 
+Currier, N., and Endicott. Map of the Croton Water Pipes with the Stop Cocks. Lithograph. New York, ca. 1850. New York Historical Society.",Distribution unclear or incomplete,"1(low) ≤ 50;  2 (moderate) = 51-84; 3 (high) ≥ 85
+Hydrant density variable is the ordinal transformation of ward-level counts, categorized into low, moderate, and high groups based on terciles of the observed distrubtion to reduce sensitivity to minor counting uncertainty.",exposure
+stopcocks_per_sq_mile_1850,Density of stopcocks per square mile of ward area.,numeric,Count per square mile ,1849-1850,stopcock_count_1850 / ward_area_1849,"Calculated from
+Currier, N., and Endicott. Map of the Croton Water Pipes with the Stop Cocks. Lithograph. New York, ca. 1850. New York Historical Society. 
+and Ward area estimates",Blank indicates missing stopcock count or ward area,Normalizes infrastructure by spatial extent per ward.,exposure
+hydrants_per_sq_mile_1850,Density of hydrants per square mile of ward area.,numeric,Count per square mile ,1849-1850,hydrant_count_1850 / ward_area_1849,"Calculated from
+Currier, N., and Endicott. Map of the Croton Water Pipes with the Stop Cocks. Lithograph. New York, ca. 1850. New York Historical Society. 
+and Ward area estimates",Blank indicates missing hydrant count or ward area,Normalizes infrastructure by spatial extent per ward.,exposure
+stopcocks_per_1000_1850,"Number of stopcocks per 1,000 residents.",numeric,"Count per 1,000 persons ",1849-1850,(stopcock_count_1850 / population_1850) x 1000,"Calculated from
+Currier, N., and Endicott. Map of the Croton Water Pipes with the Stop Cocks. Lithograph. New York, ca. 1850. New York Historical Society. 
+United States Census Office. The Seventh Census of the United States, 1850: Statistics of the State of New York. Washington DC: Government Printing Office, 1853.",Blanks indicate missing stopcock count or population,Approximates infrastructure availablity relative to population.,exposure
+hydrants_per_1000_1850,"Number of hydrants per 1,000 residents.",numeric,"Count per 1,000 persons ",1849-1850,(hydrant_count_1850 / population_1850) x 1000,"Calculated from
+Currier, N., and Endicott. Map of the Croton Water Pipes with the Stop Cocks. Lithograph. New York, ca. 1850. New York Historical Society. 
+United States Census Office. The Seventh Census of the United States, 1850: Statistics of the State of New York. Washington DC: Government Printing Office, 1853.",Blanks indicate missing hydrant count or population,Approximates infrastructure availablity relative to population.,exposure
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
