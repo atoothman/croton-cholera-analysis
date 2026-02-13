@@ -6,8 +6,9 @@ This repository contains ward level data and statistical analysis for the study 
 ward_level_data.csv
   Frozen ward level dataset used for all analysis
 
- data_dictionary.csv
+data_dictionary.csv
   Definitions and descriptions of variables
 
- sources_and_notes.csv
+sources_and_notes.csv
   Archival sources, citations, and methodological decisions
+
